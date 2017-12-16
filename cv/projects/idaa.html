@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>PDA / IDAA Integration</title>  
+	<style>
+		.modal .modal-body {
+			max-height: 650px;
+			max-width: 1650px;
+			overflow-y: auto;
+			overflow-x: auto
+		}
+	</style>
+</head>
+<body>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">PDA / IDAA Integration</h4>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
+				<p>The IBM DB2 Analytics Accelerator for IBM z/OS (IDAA) combines IBM System Z, 
+				DB2 for z/OS, and IBM PureData System for Analytics technologies to accelerate the
+				execution of complex queries in a DB2-for-z/OS environment and deliver unsurpassed, 
+				mixed-workload performance for complex business analytics.  By using IDAA with System z, you get a modern 
+				environment that helps create fast insights from large volumes of data and deliver those insights seamlessly.</p>
+				<p>IDAA will alleviate end-user frustration with slow queries, offload processing and CPU cycles from the 
+				z/OS system, and enable users to analyze large quantities of data quickly; and it does this without the user 
+				even being aware that IDAA exits in the background.  IDAA is an appliance that adds another Resource Manager to 
+				DB2 for z/OS, just like Lock Manager or Data Manager. It can be seen as an additional access path for dynamic SQL 
+				statements in DB2 for z/OS.  No changes are required to existing applications because neither users nor applications 
+				are, or need to be, aware of its existence to take advantage of its capabilities.  Whenever queries are eligible for 
+				being processed by IDAA, users will immediately benefit from shortened response times without any further actions.</p>
+				<p><img class="img-responsive" src="img/portfolio/fullsize/idaa-architecture.png" alt="IDAA Architecture"/></p>
+				<h3>How does PDA/IDAA achieve performance?</h3>
+				<p>PDA uses a divide and conquer strategy.  Each appliance contains a minimum of 96 1TB Disks and 96 S-blade drives, 
+				each with their own memory and CPU.  The data is spread or distributed across the blades based on how the data 
+				is accesses. As programs are executed, the host compiles the code and distributes queries across individual S-Blades
+				or SPUs (Snippet Processing Units) to run in parallel. Once distributed, the SPUs perform the processing with FPGAs 
+				optimized to process streaming data.  FPGA first filters out only the relevant columns needed by the query and then 
+				processes the “WHERE” clause as data streams off of the disk, so only the data needed for processing is moved to the 
+				next step.  When the processing is complete, the SMP host aggregates the results.</p>
+				<p><img class="img-responsive" src="img/portfolio/fullsize/netezzaQuery.gif" alt="IDAA How Works"/></p>
+			
+
+            </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>			<!-- /modal-footer -->
+</body>
+</html>

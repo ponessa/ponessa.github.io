@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>IBM CIO Data Warehousing Strategy</title>  
+	<style>
+		.modal .modal-body {
+			max-height: 650px;
+			max-width: 1650px;
+			overflow-y: auto;
+			overflow-x: auto
+		}
+	</style>
+</head>
+<body>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">IBM CIO Data Warehousing Strategy</h4>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
+				<p>In software engineering a <b>framework</b> is a set of cooperating components that make up a reusable design for a specific class of software.  The framework provides 
+				architectural guidance by partitioning the design into abstract components and defining their responsibilities and collaborations.  It serves as a roadmap for building 
+				integrated solutions with reusable components.  The first level of the SIW Architecture is the framework which is the <b>Conceptual level</b> which describes the macro 
+				level components and a layered architecture that is built on solid architectural principles such as separation of layers with an emphasis on increasing the cohesion between 
+				the layers and reducing the coupling that exists between them. This level of elaboration is technology agnostic. The diagram below shows the CIO O2C Information Warehouse Framework, 
+				defining the components, layers, and their interactions.  Thereafter the SIW Architecture was built off of this framework.</p>
+				<a name="architecture-top"></a>
+			<img class="img-responsive" src="img/portfolio/fullsize/siwArch.jpg" alt="SIW DataWarehouse Framework" usemap="#siwInfoArchitecture"/>
+			<map name="siwInfoArchitecture"><area alt="Operational Data Zone" coords="1,3,188,388" href="#_TocOperationalDataZone" shape="rect" /> <area alt="Operational Data Store" coords="213,107,324,260" href="#_TocOperationalDataStore" shape="rect" /> <area alt="Operational Data Store ADL" coords="350,106,460,247" href="#_TocOperationalDataStore" shape="rect" /><area alt="Archive / Unstructured Data Layer" coords="206,271,332,389" href="#_TocArchiveLayer" shape="rect" /> <area alt="Data Warehouse Layer" coords="470,106,584,232" href="#_TocDataWarehouseLayer" shape="rect" /> <area alt="Data Mart Layer" coords="595,107,695,210" href="#_TocDataMartLayer" shape="rect" /> <area alt="Service Layer" coords="214,1,847,50" href="#_TocServiceLayer" shape="rect" /> <area alt="Master Data Management" coords="344,286,707,335" href="#_TocMasterDataManagement" shape="rect" /> <area alt="Metadata Governance" coords="346,339,848,389" href="#_TocMetadataGovernance" shape="rect" /> <area alt="Security" coords="211,398,847,427" href="#_TocSecurity" shape="rect" /> <area alt="Information Delivery" coords="729,68,847,307" href="#_TocInformationDelivery" shape="rect" /></map>
+
+			<p><small><span style="color: #808080;"><em>Click on a component to go directly to a section.</em> </span></small></p>
+			<a name="_TocOperationalDataZone"> </a>
+			<a href="#architecture-top">Top</a>
+			<h4>Operational Data Zone / Authoritative Source Systems</h4>
+			<p>The first layer, the Authoritative Source Systems, is actually outside the information warehouse, but is the source of all data in the information warehouse.  This layer 
+			contains the data that supports the applications used to run the business in real-time data repositories.  This data is heterogeneous, stored in a variety of formats, and distributed, 
+			stored in multiple locations.  It is too busy and too vital to be interrupted for decision support functionality.</p>
+			<p>This data contains both structured and unstructured data.  The current SIW implementation dose not handle unstructured data however strategically the SIW will look to Hadoop to 
+			manage storage of unstructured data and archived structured data.</p>
+			<a name="_TocOperationalDataStore"></a>
+			<a href="#architecture-top">Top</a>
+			<h4>Operational Data Store</h4>
+			<p>The information warehouse itself has three data layers, the Operational Data Store or ODS, Data Warehouse or DW, and the Datamart or DM layers.  Starting with the first layer, 
+			the <strong>Operational Data Store</strong> (<strong>ODS</strong>) is the physical realization of the reconciled and consolidated authoritative source system layer.  
+			Attributes of data in this layer are:</p>
+			<ul>
+				<li>Detailed</li>
+				<li>Fine grained</li>
+				<li>Autonomous (Normalized, 3NF<a href="#_ftn1" name="_ftnref1" title=""><span style="font-family: Verdana, Geneva, sans-serif"><span style="font-size: 10.0pt;">[1]</span> </span> </a>)</li>
+				<li>Consistent</li>
+				<li>Historical</li>
+				<li>Modeled</li>
+			</ul>
+			<p>The physical implementation benefits from centralization, however this ideal is not always achievable due to volumes of detailed data.  Regardless of whether the ODS is a 
+			single physical repository or consist of several distributed repositories, the ODS is intended to be the control point where quality and integrity of data is assured before making 
+			available to a wider audience of users.</p>
+			<p>Given the large size of the ODS, resulting from the level of detail and the storage of historical data, the database schema is generally highly normalized.  Thus, the ODS is not the 
+			primary repository for user queries since normalized data makes the schema too complex for efficient ad-hoc analysis.  That is, all the normalized, autonomous data has to be re-“joined” 
+			together to reconstruct a meaningful result set for analysis.  The end user population should be increasingly driven to the data warehouse and datamart tiers as these layers mature with 
+			respect to their data content.</p>
+			<p>Additionally, the ODS layer and underlying its data model allows for the segmentation of the ODS into two parts; these are:</p>
+			<ol>
+				<li>Data staging layer</li>
+				<li>Atomic data layer</li>
+			</ol>
+
+			<a name="_TocDataWarehouseLayer"></a>
+			<a href="#architecture-top">Top</a>
+			<h4>Data Warehouse Layer</h4>
+			<p>The next data layer within the framework is the Data Warehouse layer.  The data warehouse tier is used by the end user for reporting, analysis, and/or prediction of the business.  
+			This included management information reporting, decision support, and executive information systems, marketing analysis, data mining, etc. This layer helps the SIW</p>
+
+			<ul>
+				<li>Improve Business Decision Making by improving data quality and consistency and enabling near real-time, cross brand analysis.</li>
+				<li>Reduce Run Costs by reducing the complexity and redundancy within information supply chains and virtualized model/data layers.  </li>
+				<li>Reduce CPU usage, improve system throughput, improve end user experience, and improve end user data quality.</li>
+			</ul>
+			<p>As the main end user interface to the corporate 
+			data, it imperative that the database schema that defines the data warehouse layer be understandable to the end user and perform efficiently when asked to perform ad-hoc analysis.  It is for 
+			these reasons that this layer needs to be designed follow the <strong>dimensional model</strong>, which focuses on business process and questions and simplicity from the end-user's standpoint.</p>
+
+			<p>On-line transaction processing (OLTP) systems are profoundly different from decision support systems.  The functionality is different, the end user community is different, the 
+			data content and structures are different, and the software is different.  In spite of all these differences data warehouses continue to be designed using OLTP thinking and design tools.</p>
+
+			<p>The Entity Relationship (ER) model has been used for year to design operational database schemas.  Operational databases require fast response and near full time availability to many 
+			concurrent users, they are therefore designed to support simultaneous access, maximize concurrency, and optimize insert, update, delete performance to keep each transaction’s execution time as short as possible.</p>
+
+			<p>Traditional ER database modeling focus on removing redundancy to optimize storage and insert, update, and delete operations.  The focus is on the autonomy of the data elements.  This model 
+			is ideal for operational environments that require fast insert, update, and delete operations since, by removing redundancy the application program/database management system only has to touch a piece 
+			of data once during these operations.</p>
+
+			<p>Standard database design practice recommend/mandate that, within the ER model a DB schema be normalized to third normal form (3NF), which, by definition is achieved when all non-key data elements 
+			occur only once within the schema.</p>
+
+			<p>Data warehouses are so different from transaction-oriented systems that they require a complete departure from entity-relationship modeling in favor of something called "dimensional modeling.”  </p>
+
+			<p>The Dimensional Model (DM) focuses on simplicity for the end user - where a measured amount of redundancy is designed into the schema for ease of use and end user access 
+			performance purposes.  The DM gathers your basic business measurements into centralized (highly de-normalized) Fact tables.  Business attributes (e.g. industry, offerings, 
+			practice) are captured as dimensions.  Each dimension is a subject around which analysis is performed, are searched on, summarized by, etc.</p>
+
+			<a name="_TocDataMartLayer"></a>
+			<a href="#architecture-top">Top</a>
+			<h4>Data Mart Layer</h4>
+
+			<p>The final data layer within the framework is the Data Mart layer.  Data marts are similar to the data warehouse layer except they are designed to support very specific 
+			business needs and/or end user constituencies.  They primarily contain summary-level data but can also include detailed information in support the needs of the specific area.</p>
+
+			<p>Note that data marts are optional and should only be created if needed.  Data marts may also reside in relational or multi-dimensional repositories that are either 
+			centrally located, on the same system as the data warehouse, or distributed.</p>
+			<p>Looking at all the data tiers</p>
+			<img class="img-responsive" src="img/portfolio/fullsize/dataPyramid.png" alt="Data Pyramid" />
+			<a name="_TocArchiveLayer"></a>
+
+			<a href="#architecture-top">Top</a>
+			<h4>Data Archival and Unstructured Data</h4>
+
+			<p>The final and <strong>FUTURE</strong> layer is for data archival and unstructured data. The SIW’s current plan is to integrate <strong>Hadoop</strong> with its MapReduce framework 
+			and the Hadoop Distributed File Systems to store, retrieve, and perform analysis on archived structured data and non-structured data. The “strategy” also calls for using IBM Watson 
+			Explorer to knit together the structured and non-structured data.</p>
+			<a name="_TocServiceLayer"></a>
+
+			<a href="#architecture-top">Top</a>
+
+			<h4>Service Layer</h4>
+			<p>The Services Layer is multi-layered itself.  It is comprised of <strong>Extract, Transformation, and Load</strong> or <strong>ETL</strong> services, which includes <strong>transformation services</strong> and <strong>Data as a Service</strong>, which, in turn, includes <strong>Device Management services</strong>.</p>
+
+			<h4>ETL Services</h4>
+
+			<p>ETL Services include all programs, systems, and middleware that facilitate the movement of data from source to target.  That is, the ETL services support the movement of the data from the 
+			authoritative source systems to the ODS data layer as well as between the three data layers of the information warehouse (ODS, DW, and DM).</p>
+
+			<p>Populating the information warehouse is the most technically challenging part of building a information warehouse solution. It is the part of warehousing where tools were first deployed 
+			to reduce the effort involved.</p>
+
+			<p>For all the population methodologies there are three constant components:</p>
+
+			<ol>
+				<li><strong>Capture/Extract</strong> the data from the source system</li>
+				<li><strong>Transformation</strong> of data between the two environments</li>
+				<li><strong>Apply/Load</strong> the captured data to the target environment</li>
+			</ol>
+
+			<p>There are two fundamental types of capture, Static and Incremental.</p>
+
+			<ol>
+				<li><strong>Static Capture</strong> essentially takes a snapshot of the source data at a point in time.  This snapshot should only contain the subset of data required by the target system -- many 
+				fields in operational systems exists solely for technical reasons related to maintaining integrity, to establish audit trails, or improve performance.  Additionally, there may be redundant and/or 
+				obsolete data.  All such data is irrelevant to managing the business and need not be captured.</li>
+				<li><strong>Incremental Capture</strong> captures changes in the data rather than a static capture of the full resulting data set.  The volume of changes in a set of data is almost always 
+				some order of magnitude smaller than the total volumes -- and is therefore substantially more efficient.<br />
+				<br />
+				For incremental captures, the goal is to set up a <strong>publish/subscribe</strong> environment where committed changes are captured or published.  Interested targets or subscribers 
+				thereafter consume the published information and apply the necessary updates.  This paradigm keeps the publisher completely decoupled from the subscriber.</li>
+			</ol>
+
+			<p>There are a number of IBM products and services that support the ETL process, both using static and incremental capture processing; however there are cases where custom 
+			coding is required.  From an Information Warehouse strategy perspective, we want to limit the need for custom coding replacing it, where possible, with IBM InfoSphere Data Stage models.  For other 
+			cases where transformations can not be performed within the ETL product, transformations logic should be wrapped as callable and reusable <strong>transformational services</strong>.</p>
+
+			<h4>Implementing Transformational Services</h4>
+
+			<p>Web services are generally thought of as SOAP (Simple Object Access Protocol) over HTTP or REST (Representational State Transfer).  The transformational services within the ETL services layer 
+			should be available either through SOAP or RESTful, depending on the nature of the transformation.</p>
+			<div style="border: solid windowtext 1.0pt; padding: 1.0pt 4.0pt 1.0pt 4.0pt; background: #F3F3F3; margin-left: .5in; margin-right: 45.0pt;">
+				<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 6.0pt; margin-left: 0in; background: #F3F3F3; border: none; padding: 0in;">
+					SOAP (using WSDL, Web Service Definition Language) is a heavy-weight XML standard that is centered on document passing.  The advantage with this is that your requests and responses can be very 
+					well structured.  The downside is it is XML, and is very verbose.  However, this can be a good thing if two parties need to have a strict contract.  Additionally, SOAP is generally 
+					transport-agnostic, meaning you don't necessarily need to use HTTP.</p>
+
+				<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 6.0pt; margin-left: 0in; background: #F3F3F3; border: none; padding: 0in;">
+					REST is very lightweight, and relies upon the HTTP standard to do its work.  It is great to get a useful web service up and running quickly.  If you don't need a strict API definition, this is 
+					the way to go.  Most web services fall into this category.  You can version your API so that updates to the API do not break it for people using old versions (as long as they specify a version). 
+					REST essentially requires HTTP, and is format-agnostic (meaning you can use XML, JSON, HTML, whatever).</p>
+			</div>
+			<h4>Data as a Service</h4>
+			<p>Google, Flickr, YouTube, Facebook, Amazon .. no matter what site you go to today, chances are there are published APIs available. The reason is simple, these applications contain data that has value 
+			to people outside the context of the application; and the API makes this it available.</p>
+
+			<p>BMS DaaS enables an framework to create and manage RESTful APIs to expose SIW reference data and/or measurement data to authorized individuals (based on API tokens) outside of the SIW application.</p>
+			<a name="_TocMasterDataManagement"></a>
+
+			<a href="#_TocOperationalDataZone">Top</a>
+
+			<h4>Master &amp; Reference Data Management</h4>
+			<p>Master &amp; Reference Data Management (MDM / RDM) is the set of processes and tools that define and manage the non-transactional data within an enterprise.  It is managed outside the SIW by the CIO and data 
+			stewards</p>. 
+			<p>Core IBM reference data (e.g. data where the domain is defined within IBM’s Business Data Standards (BDS)) will be managed by IBM CIO strategic applications/repositories, specifically InfoSphere 
+			Reference Data Management (RDM) and the Taxonomy Management Tool (TMT).  RDM is the tool where the reference data is defined and TMT is where the data is published.  From the TMT tool, users can review 
+			the data, extract it in various formats including XML and HTML, or the reference data can be loaded/ETL into a target source (such as the SIW) using pre-canned InfoSphere DataStage jobs.</p>
+			<img class="img-responsive" src="img/portfolio/fullsize/rdmTmtFlow.png" alt="RDM / TMD Data Flow" />
+
+			<a name="_TocMetadataGovernance"></a>
+			<a href="#architecture-top">Top</a>
+
+			<h4>Metadata / Governance Layer</h4>
+			<p>Metadata, or information about your data, provides administrators and business users with descriptions of the data or informational objects that they can access. The SIW will have a consistent 
+			information catalog and the data models will be built using a common glossary.</p>
+			<p>The Metadata Layer and metadata repository is an essential component of the architecture that is used to integrate all components of the Warehouse. Metadata, or information about your data, provides 
+			administrators and business users with descriptions of the data or informational objects that they can access. For example, profit might be the product of a complex series of calculations based on regional 
+			revenue and expense. Metadata is used to document these calculations so they are well understood by the business user trying to coax a competitive advantage out of their data. Additionally, metadata provides 
+			the detailed descriptions of objects and actions that software tools act on, use, or perform. Finally, metadata can be used to control the operation of the infrastructure itself. So, there are three types of 
+			metadata: business, and two flavors of technical metadata, build and control metadata. All types of metadata are important in building, maintaining, and using the warehouse.</p>
+
+			<p><b>Business metadata</b> is used by business analysts and end users to provide a business description of informational objects. It assists end users in locating, understanding, and accessing information 
+			in the data warehouse or datamarts. Business metadata might include the calculation used to create a particular value, the date and time that data was captured, or a description of a data element. Business 
+			metadata not only applies to the data in the warehouse but equally to a broader class of informational objects such as a graph or chart viewed through a presentation tool, a query, or report returned from a 
+			decision-support or OLAP tool, or a Web page retrieved from the Internet.</p>
+
+			<p><b>Build Time metadata</b> is used by administrators and software tools and provides the technical descriptions of data and operations. Build Time metadata includes information about source data, target data, 
+			and the rules that are used to extract, filter, enhance, cleanse, and transform source data to target data. Build Time metadata is created by a relational database (e.g. database schema), by warehouse and 
+			transformation tools (e.g. descriptions of transformations), and by the warehouse manager (e.g. Schedules).</p>
+
+			<p><b>Control Metadata</b> is actively used by the warehouse infrastructure as a mechanism to manage and control the operation of the infrastructure itself. It describes the ongoing activities to which the 
+			data warehouse is subject. This metadata is important to both administrators and end users of the warehouse. As with business metadata, control metadata is further segmented into multiple types:</p>
+
+			<ol>
+				<li><b>Currency metadata</b> describes the actual information about the currency or timeliness of the business data. Examples are the time of the last update of a table in the database or the time a 
+				particular data warehouse population routine is to run on a given day.
+				<p>Since currency metadata is far more volatile than other metadata with its frequency of update and volumes, it requires special consideration and treatment.</p>
+				</li>
+				<li><b>Utilization metadata</b> is associated with the security and authorization functionality used to control access to the warehouse. In addition, it can be used to provide the means to track how the data within the warehouse is being used, and thus ascertaining its usefulness to the end user.</li>
+			</ol>
+			
+			<a name="_TocSecurity"></a>
+			<a href="#architecture-top">Top</a>
+			<h4>Security Layer</h4>
+
+			<p>Security Layer, The security layer includes Authentication and Authorization Services, Asset Protection, and Intrusion Detection. It provides the mechanisms to challenge and authenticate users as well as 
+			to verify their right to access the requested resources.</p>
+			<a name="_TocInformationDelivery"></a>
+
+			<a href="#architecture-top">Top</a>
+
+			<h4>Information Delivery Layer</h4>
+
+			<p>Information Delivery Layer, Supports business intelligence, analytics, and performance management. This includes reporting, querying, dashboards, scorecards, automatic alerts, and analysis. This layer also 
+			interfaces with the services and data layers to provide statistics and predictive analytics for high impact decision support.</p>
+
+			<div> 
+			<hr align="left" size="1" width="33%" />
+			<div id="ftn1">
+			<p><a href="#_ftnref1" name="_ftn1" title=""><span style="font-family: Verdana, Geneva, sans-serif"><span style="font-size: 10.0pt;">[1]</span> </span> </a> Third Normal Form or 3NF is a level of data base 
+			normalization where every non-key attribute occurs only once within the database schema.  Normalization itself is the process of organizing the columns and tables of a database to minimize redundancy.</p>
+
+			</div>
+
+            </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>			<!-- /modal-footer -->
+</body>
+</html>

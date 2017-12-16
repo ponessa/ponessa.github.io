@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Information Catalog Compiler &amp; Viewer</title>  
+	<style>
+		.modal .modal-body {
+			max-height: 650px;
+			max-width: 1650px;
+			overflow-y: auto;
+			overflow-x: auto
+		}
+	</style>
+</head>
+<body>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Information Catalog Compiler &amp; Viewer</h4>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
+				<p>The Information Catalog is the heart of an information warehouse solution.  It is an essential component of the architecture that is 
+				used to integrate all components of the solution.  It enables users to understand the source data, target data, and the rules that are 
+				used to extract, filter, enhance, cleanse, and transform source data to target data, the schema of the data, how the data interrelates, 
+				the business processes the data is used to support, what data is available to them, etc.</p>
+				<p>BMSIW users were frustrated with the quality and currency of documentation that described the tables and attributes available 
+				to them within the BMSIW decision support system.  Despite multiple efforts, workload and shifting priorities kept the BMSIW team 
+				from being able to keep an &quot;information catalog&quot; up to date.</p>
+				<p>It was decided that instead of trying to manually maintain an information catalog, we&apos;d start generating one instead.  The 
+				BMSIW decided to follow the model of Java&apos;s Javadoc, which is a documentation generator for generating API documentation in 
+				HTML format from Java source code. The HTML format is used to add the convenience of being able to hyperlink related documents together.</p>
+				<p>The BMSIW put in place a standard that stated that all DB2 objects belonging to the BMSIW must have:</p>
+				<ol>
+					<li>Business definitions for all tables</li>
+					<li>The Label attribute populated for all tables linking the table to a defined BMSIW subject area.</li>
+					<li>Business definitions for all columns </li>
+				</ol>
+				<p>With these three rules in place, the Information Catalog Compiler was written to read table, column, index, and view information 
+				from the DB2 system catalog, augment it with business information stored in XML files, and generate a navigable set of HTML pages 
+				that make up an information catalog.</p>
+				<p><img class="img-responsive" src="img/portfolio/fullsize/xml-xslt-processing.jpg" alt="XML-XSLT Processing"/></p>
+				<p>This worked fine for years but there were limitations</p>
+				<ol>
+					<li>Inability to intermix multiple sources and versions.  With the SIW expanding into multiple data tiers, and multiple versions of each, a new paradigm was needed.</li>
+					<li>No API interface into the information catalog</li>
+					<li>ICC relied on data within the DB2 System Catalog which limited its ability to build a catalog for non-DB2 repositories (e.g. PDA).</li>
+				</ol>
+				<p>Therefore it was re-written to be 100% XML driven.  Instead of being driven partially from the DB2 system catalog and partially from 
+				XML documents, the entire catalog will be generated from XML. Utilities were provided, written using DB2 PureXml, that will generate the 
+				appropriate XML based on both the DB2 and PDA system catalogs. A new interface that will emulate the Dojo API viewer.  This will enable users 
+				to easily switch between SIW data tiers and versions and do side by side comparisons of both.</p>
+				<p>The new catalog viewer allows users to select between data tiers and versions.</p>
+				<p><img class="img-responsive" src="img/portfolio/fullsize/icc-data-tier.jpg" alt="Information Catalog Viewer"/></p>
+				<p>Has API support, see <a href="http://bms3.sby.ibm.com/siwIc/?qs=ODS-ADL/1.0/AGREEMENT/BILLING_DETAIL" target="_blank">http://bms3.sby.ibm.com/siwIc/?qs=ODS-ADL/1.0/AGREEMENT/BILLING_DETAIL</a> 
+				or Help <a href="http://bms3.sby.ibm.com/siwIc/?qs=help" target="_blank">http://bms3.sby.ibm.com/siwIc/?qs=help</a> </p>
+				<p>The complete viewer looks like the image below.</p>
+				<p><img class="img-responsive" src="img/portfolio/fullsize/icc-1300x700.jpg" alt="Information Catalog Viewer"/></p>
+			
+
+            </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>			<!-- /modal-footer -->
+</body>
+</html>

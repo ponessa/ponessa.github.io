@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>BMS Data as a Service (DaaS) infrastructure</title>  
+	<style>
+		.modal .modal-body {
+			max-height: 650px;
+			max-width: 1650px;
+			overflow-y: auto;
+			overflow-x: auto
+		}
+	</style>
+</head>
+<body>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">BMS Data as a Service (DaaS) infrastructure</h4>
+            </div>			<!-- /modal-header -->
+            <div class="modal-body">
+			<p><img class="img-responsive" src="img/portfolio/fullsize/daasEvolution1.gif" alt="DaaS Evolution"/></p>
+            <p>It used to be that data existed in a box and when one system needed data from another, the data was physically moved 
+			or accessed through some form of distributed processing or federation.  However, the replication of application 
+			functionality and data using point to point connections is not a sustainable paradigm.  As our industry entered the 
+			2000&apos;s, and the number of enterprise applications and systems proliferated, people realized that there needed to 
+			be more direct communications between applications, which introduced another layer of interface, which was eventually 
+			labeled Enterprise Application Integration, or EAI.  The idea was that if these systems could be integrated, existing 
+			functionality could be reused instead of replicated across multiple systems.  The reduced functional redundancy meant 
+			that functionality only needed to be maintained and enhanced within a single system saving time and money in development, 
+			testing, and deployments.</p>
+			<p>Application integration began with the application programming interface (API) to expose system functionality to external processes. 
+			Where this worked okay it still required application to be written in the same language and running on the same platform.  This led to 
+			language and platform specific adaptors, implementing the mediator pattern, in order to integrate systems; however these adaptors 
+			were difficult to maintain and not widely adopted.</p>
+			<p>The next phase of the integration evolution attempted to expose system function and data through platform independent means.  
+			Over time, the EAI industry started widely promoting the use of a Services Oriented Architecture (SOA) using the SOAP (Simple Object Access Protocol) 
+			specification, which used existing EAI methodology of integrating applications through the use of messaging.  Web Services, which facilitated 
+			the SOA, exposed the system&apos;s functions in a language and platform independent manner.</p>
+			<p>Data as a Service, or DaaS is the next logical extension of SOA.  If data is needed, it is requested and delivered in a message based, 
+			language and platform independent method; without requiring an extract, transformation, and load (ETL) process or reporting packages.  The 
+			concept of data-as-a-service advocates accessing data "where it lives" -- the actual platform on which the data resides doesn&apos;t matter.  
+			With data-as-a-service, any business process can access data wherever it resides.</p>
+			<p>Below is the component architecture for the BMS DaaS Solution</p>
+			<p><img class="img-responsive" src="img/portfolio/fullsize/daas.jpg" alt="DaaS Architecture"/></p>
+			<p>Finally, the DaaS solution contains has a J2EE Rich Internet Application (RIA) client implemented with the Dojo toolkit.</p>
+			<p><img class="img-responsive" src="img/portfolio/fullsize/daasCreateNewEdit.gif" alt="DaaS RIA"/></p>
+            </div>			<!-- /modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>			<!-- /modal-footer -->
+</body>
+</html>
